@@ -1,0 +1,36 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-register">
+<h2 class="mt-5">Kayıt Ol</h2>
+<div class="form-group">
+  <input type="text" id="userName" name="userName" formControlName="userName" class="form-control" placeholder="Kullanıcı Adı" autofocus>
+  <span class="help-block" *ngIf="registerForm.get('userName')?.hasError('required') &&registerForm.get('userName')?.touched">
+  Kullanıcı adı gereklidir.</span>
+</div>
+<div class="form-group">
+  <input type="password" id="password" name="password" formControlName="password" class="form-control" placeholder="Şifre" autofocus>
+  <span class="help-block" *ngIf="registerForm.get('password')?.hasError('required') &&registerForm.get('password')?.touched">
+  Şifre gereklidir.</span>
+  <span class="help-block" *ngIf="registerForm.get('password')?.hasError('minlength') &&registerForm.get('password')?.touched">
+    Şifre için en az 4 karakter gereklidir.</span>
+    <span class="help-block" *ngIf="registerForm.get('password')?.hasError('maxlength') &&registerForm.get('password')?.touched">
+      Şifre için en fazla 8 karakter gereklidir.</span>
+</div>
+<div class="form-group">
+  <input type="confirmPassword" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Şifre tekrarı" autofocus>
+  <span class="help-block" *ngIf="registerForm.get('password')?.hasError('required') &&registerForm.get('password')?.touched">
+  Şifre doğrulama gereklidir.</span>
+  
+  <span class="help-block" *ngIf="registerForm.get('password')?.touched &&registerForm.get('password')?.hasError('missmatch')">
+    Şifreler uyumsuz.</span>
+    
+</div>
+
+<button
+          type="submit"
+          class="btn btn-lg btn-primary btn-block"
+          [disabled]="!registerForm.valid"
+        >
+          Ekle
+        </button>
+        <h6>{{ registerForm.value | json }}</h6>
+        <h6>{{ registerForm.status | json }}</h6>
+</form>
